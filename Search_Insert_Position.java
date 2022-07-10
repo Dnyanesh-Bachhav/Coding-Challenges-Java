@@ -4,7 +4,7 @@ Given a sorted array of distinct integers and a target value, return the index i
 You must write an algorithm with O(log n) runtime complexity.
 */
 
-// Leet Challenge-35
+// Leetcode Challenge-35
 
 
 class Search_Insert_Position{
