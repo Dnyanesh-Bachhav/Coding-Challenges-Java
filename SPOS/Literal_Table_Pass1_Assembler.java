@@ -138,7 +138,7 @@ public class Literal_Table_Pass1_Assembler{
                         t1.checkString(arr[i],i,START_ADDRESS);
                         if(arr[i].contains("='"))
                         {
-                            System.out.println( arr[i] );
+                            System.out.println(arr[i]);
                             literals.add(arr[i]);
                         }
                     }
