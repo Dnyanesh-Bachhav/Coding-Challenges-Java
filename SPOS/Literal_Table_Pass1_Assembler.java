@@ -5,7 +5,7 @@ class tables{
     static int count = 0;
     HashMap<String, Integer> AD,RG,IS,CC,DL;
     ArrayList<Integer> lables;
-    Set<String> symbol_table;
+    ArrayList<String> literal_table;
 
     // Data Structure initialization
     tables(){
@@ -14,7 +14,7 @@ class tables{
 		IS = new HashMap<>();
 		RG = new HashMap<>();
 		DL = new HashMap<String, Integer>();
-		symbol_table = new LinkedHashSet<String>();
+		literal_table = new ArrayList<String>();
         lables = new ArrayList<>();
 		// Declarative Statements
 		DL.put("DC", 01);
@@ -70,37 +70,45 @@ class tables{
         {
         }
         else{
-            if(str.matches("[a-zA-Z0-9]*"))
+            // if(str.matches("[a-zA-Z0-9]*"))
+            // {
+            //     int num;
+            //     try
+            //     {
+            //     num = Integer.valueOf(str);
+            //     }
+            //     catch(Exception e)
+            //     {
+            //         symbol_table.add(str);
+            //         if(index==0)
+            //         lables.add(address);
+            //     }
+            // }
+            if(str.contains("='"))
             {
-                int num;
-                try
-                {
-                num = Integer.valueOf(str);
-                }
-                catch(Exception e)
-                {
-                    symbol_table.add(str);
-                    if(index==0)
-                    lables.add(address);
-                }
+                // str = str.replace("=","");
+                // str = str.replace("'","");
+                // System.out.println(str);
+                literal_table.add(str);
+                lables.add(address);
             }
+            
         }
     }
-    void displaySymbolTable(){
-        ArrayList<String> li1 = new ArrayList<>();
-        li1.addAll(symbol_table);
+    void displayLiteralTable(){
+        
         for(int i=0;i<lables.size();i++)
         {
-            System.out.println(i+"  "+ li1.get(i) +"    "+  lables.get(i));
+            System.out.println(i+"  "+ literal_table.get(i) +"    "+  lables.get(i));
         }
     }
 }
 
 
-public class Symbol_Table_Pass1_Assembler{
+public class Literal_Table_Pass1_Assembler{
     public static void main(String args[]) throws Exception
     {
-        System.out.println("*** PASS 1 Assembler Symbol Table ***");
+        System.out.println("*** PASS 1 Assembler Literal Table ***");
         tables t1 = new tables();
         int START_ADDRESS = 500;
         ArrayList<Integer> li = new ArrayList<>();
@@ -130,11 +138,12 @@ public class Symbol_Table_Pass1_Assembler{
                 {
                     t1.checkString(arr[i],i,START_ADDRESS);
                     // System.out.println(arr[i]);
+
                 }
                 }
             }
         }
-        t1.displaySymbolTable();
+        t1.displayLiteralTable();
         //System.out.println(li);
     }
 }
