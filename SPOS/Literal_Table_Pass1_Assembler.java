@@ -49,11 +49,9 @@ class tables{
 		RG.put("BREG",2);
 		RG.put("CREG",3);
 		RG.put("DREG",4);
-		
     }
     void checkString(String str,int index,int address)
     {
-        
         if(AD.containsKey(str))
         {
         }
@@ -70,36 +68,11 @@ class tables{
         {
         }
         else{
-            // if(str.matches("[a-zA-Z0-9]*"))
-            // {
-            //     int num;
-            //     try
-            //     {
-            //     num = Integer.valueOf(str);
-            //     }
-            //     catch(Exception e)
-            //     {
-            //         symbol_table.add(str);
-            //         if(index==0)
-            //         lables.add(address);
-            //     }
-            // }
             if(str.contains("='"))
             {
-                // str = str.replace("=","");
-                // str = str.replace("'","");
-                // System.out.println(str);
                 literal_table.add(str);
                 lables.add(address);
-            }
-            
-        }
-    }
-    void displayLiteralTable(){
-        
-        for(int i=0;i<lables.size();i++)
-        {
-            System.out.println(i+"  "+ literal_table.get(i) +"    "+  lables.get(i));
+            }       
         }
     }
 }
@@ -111,11 +84,13 @@ public class Literal_Table_Pass1_Assembler{
         System.out.println("*** PASS 1 Assembler Literal Table ***");
         tables t1 = new tables();
         int START_ADDRESS = 500;
-        ArrayList<Integer> li = new ArrayList<>();
+        ArrayList<String> literals = new ArrayList<>();
         FileReader fr = new FileReader("./Program.txt");
         BufferedReader br = new BufferedReader(fr);
         String line = null;
-        boolean isDSDCPresent = false;
+        boolean is_LTORG_Present = false;
+        boolean is_END_Present = false;
+        int count = 0;
         
         while((line = br.readLine())!=null)
         {
@@ -126,24 +101,50 @@ public class Literal_Table_Pass1_Assembler{
             }
             for(int i=0;i<arr.length;i++)
             {
-                if(arr[i].trim().contains("DS") || arr[i].trim().contains("DC"))
+                if(line.contains("LTORG"))
                 {
-                isDSDCPresent = true;
-                //li.add(START_ADDRESS);
+                is_LTORG_Present = true;
                 }
+                if( line.contains("END"))
+                {
+                is_END_Present = true;
+                }
+                if(is_LTORG_Present)
+                {
+                    for(int j=0;j<literals.size();j++)
+                    {
+                        System.out.println(count +"  123"+ literals.get(j) +"   "+ START_ADDRESS++);    
+                        count++;
+                    }
+                    literals.clear();
+                    is_LTORG_Present = false;
+                }
+                if(is_END_Present)
+                {
+                    for(int j=0;j<literals.size();j++)
+                    {
+                        
+                        System.out.println(count +"  12"+ literals.get(j) +"   "+ START_ADDRESS++);
+                        count++;
+                    }
+                    literals.clear();
+                }
+                
                 if(arr[i].trim() !=null)
                 {
-                arr[i] = arr[i].trim();
-                if(arr[i].isEmpty()==false)
-                {
-                    t1.checkString(arr[i],i,START_ADDRESS);
-                    // System.out.println(arr[i]);
-
-                }
+                    arr[i] = arr[i].trim();
+                    if(arr[i].isEmpty()==false)
+                    {
+                        t1.checkString(arr[i],i,START_ADDRESS);
+                        if(arr[i].contains("='"))
+                        {
+                            System.out.println( arr[i] );
+                            literals.add(arr[i]);
+                        }
+                    }
                 }
             }
         }
         t1.displayLiteralTable();
-        //System.out.println(li);
     }
 }

@@ -3,9 +3,11 @@ A   DS  3
 L1  MOVER   AREG,   B
     ADD AREG,   C
     MOVEM   AREG,   ='20'
+    LTORG
 L2  PRINT   B
     ORIGIN  L2+1
     STOP
+    MOVEM   AREG,   ='10'
 B   DC  '19'
 C   DC  17
     END
