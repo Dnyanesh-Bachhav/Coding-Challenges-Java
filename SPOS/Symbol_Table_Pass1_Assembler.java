@@ -1,35 +1,12 @@
 import java.util.*;
 import java.io.*;
-public class Symbol_Table_Pass1_Assembler{
-    public static void main(String args[]) throws Exception
-    {
-        System.out.println("*** PASS 1 Assembler Symbol Table ***");
-        tables t1 = new tables();
-        FileReader fr = new FileReader("./Program.txt");
-        BufferedReader br = new BufferedReader(fr);
-        String line = null;
-        
-        while((line = br.readLine())!=null)
-        {
-            String arr[] = line.split("\\s");
-            System.out.print(arr.length);
-            for(int i=0;i<arr.length;i++)
-            {
-                if(arr[i].trim() !=null)
-                {
-                arr[i] = arr[i].trim();
-                if(arr[i].isEmpty()==false)
-                System.out.println(arr[i]);
-                }
-            }
-        }
-        System.out.println("Hello World...!!!");
-    }
-}
+
 class tables{
     static int count = 0;
     HashMap<String, Integer> AD,RG,IS,CC,DL;
-    ArrayList<String> symbol_table,literal_table,constant_table;
+    ArrayList<Integer> lables;
+    Set<String> symbol_table;
+
     // Data Structure initialization
     tables(){
         AD = new HashMap<>();
@@ -37,8 +14,8 @@ class tables{
 		IS = new HashMap<>();
 		RG = new HashMap<>();
 		DL = new HashMap<String, Integer>();
-		symbol_table = new ArrayList<>();
-		constant_table = new ArrayList<>();
+		symbol_table = new LinkedHashSet<String>();
+        lables = new ArrayList<>();
 		// Declarative Statements
 		DL.put("DC", 01);
 		DL.put("DS", 02);
@@ -73,5 +50,92 @@ class tables{
 		RG.put("CREG",3);
 		RG.put("DREG",4);
 		
+    }
+    void checkString(String str,int index,int address)
+    {
+        
+        if(AD.containsKey(str))
+        {
+        }
+        else if(IS.containsKey(str))
+        {
+        }
+        else if(DL.containsKey(str))
+        {
+        }
+        else if(CC.containsKey(str))
+        {
+        }
+        else if(RG.containsKey(str))
+        {
+        }
+        else{
+            if(str.matches("[a-zA-Z0-9]*"))
+            {
+                int num;
+                try
+                {
+                num = Integer.valueOf(str);
+                }
+                catch(Exception e)
+                {
+                    symbol_table.add(str);
+                    if(index==0)
+                    lables.add(address);
+                }
+            }
+        }
+    }
+    void displaySymbolTable(){
+        ArrayList<String> li1 = new ArrayList<>();
+        li1.addAll(symbol_table);
+        for(int i=0;i<lables.size();i++)
+        {
+            System.out.println(i+"  "+ li1.get(i) +"    "+  lables.get(i));
+        }
+    }
+}
+
+
+public class Symbol_Table_Pass1_Assembler{
+    public static void main(String args[]) throws Exception
+    {
+        System.out.println("*** PASS 1 Assembler Symbol Table ***");
+        tables t1 = new tables();
+        int START_ADDRESS = 500;
+        ArrayList<Integer> li = new ArrayList<>();
+        FileReader fr = new FileReader("./Program.txt");
+        BufferedReader br = new BufferedReader(fr);
+        String line = null;
+        boolean isDSDCPresent = false;
+        
+        while((line = br.readLine())!=null)
+        {
+            String arr[] = line.split("\\s");
+            if(!line.contains("START"))
+            {
+                START_ADDRESS++;
+            }
+            for(int i=0;i<arr.length;i++)
+            {
+                if(arr[i].trim().contains("DS") || arr[i].trim().contains("DC"))
+                {
+                isDSDCPresent = true;
+                //li.add(START_ADDRESS);
+                }
+                if(arr[i].trim() !=null)
+                {
+                arr[i] = arr[i].trim();
+                if(arr[i].isEmpty()==false)
+                {
+                    t1.checkString(arr[i],i,START_ADDRESS);
+                    // System.out.println(arr[i]);
+
+                }
+                }
+            }
+        }
+        t1.displaySymbolTable();
+        //System.out.println(li);
     }
 }
