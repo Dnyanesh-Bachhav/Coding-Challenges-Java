@@ -145,6 +145,5 @@ public class Literal_Table_Pass1_Assembler{
                 }
             }
         }
-        t1.displayLiteralTable();
     }
 }
