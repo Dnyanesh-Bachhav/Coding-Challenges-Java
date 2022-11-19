@@ -138,7 +138,7 @@ class tables {
         }
         else if(str.trim().contains("L"))
         {
-            System.out.print(LT.get(value)+" |");
+            System.out.print(LT.get(value)+" ");
         }
         else if(!isRegisterPresent)
         {
@@ -233,6 +233,9 @@ public class Pass2_Assembler{
             if(line.contains("DL"))
             {
                 isDSDCPresent = true;
+                System.out.println(" -- -- ");
+                isDSDCPresent = false;
+                continue;
             }
             String arr[] = line.split("\\s");
             for(int i=0;i<arr.length;i++)
