@@ -113,7 +113,7 @@ public class Literal_Table_Pass1_Assembler{
                 {
                     for(int j=0;j<literals.size();j++)
                     {
-                        System.out.println(count +"  123"+ literals.get(j) +"   "+ START_ADDRESS++);    
+                        System.out.println(count +"  "+ literals.get(j) +"   "+ START_ADDRESS++);    
                         count++;
                     }
                     literals.clear();
@@ -124,7 +124,7 @@ public class Literal_Table_Pass1_Assembler{
                     for(int j=0;j<literals.size();j++)
                     {
                         
-                        System.out.println(count +"  12"+ literals.get(j) +"   "+ START_ADDRESS++);
+                        System.out.println(count +"  "+ literals.get(j) +"   "+ START_ADDRESS++);
                         count++;
                     }
                     literals.clear();
@@ -138,7 +138,7 @@ public class Literal_Table_Pass1_Assembler{
                         t1.checkString(arr[i],i,START_ADDRESS);
                         if(arr[i].contains("='"))
                         {
-                            System.out.println(arr[i]);
+                            // System.out.println(arr[i]);
                             literals.add(arr[i]);
                         }
                     }
