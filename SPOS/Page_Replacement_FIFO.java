@@ -2,7 +2,6 @@ import java.util.*;
 import java.io.*;
 public class Page_Replacement_FIFO{
     static ArrayList<Integer> li = new ArrayList<>();
-    static ArrayList<Integer> lru = new ArrayList<>();
     static Scanner sc = new Scanner(System.in);
     static int ph=0,pf=0;
     int front,rear;
@@ -13,21 +12,7 @@ public class Page_Replacement_FIFO{
     public void display(){
         System.out.println(li);
     }
-
     public void insert(int item){
-        if(!lru.contains(item)&&lru.size()<4)
-        {
-            lru.add(item);
-        }
-        else{
-            if(lru.size()==4)
-            {
-                lru.remove(3);
-                lru.add(item);
-            }
-        }
-        System.out.println("LRU Array: "+lru);
-
         if(!li.contains(item) && li.size()<3)
         {
             System.out.println("Page MISS");
@@ -36,9 +21,9 @@ public class Page_Replacement_FIFO{
         }
         else if(li.size()==3)
         {
-            front++;
             if(!li.contains(item))
             {
+            front++;
             li.set(front,item);
             System.out.println("Page MISS");
             pf++;
