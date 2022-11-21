@@ -1,11 +1,11 @@
 import java.util.concurrent.*;
 class task implements Runnable {
-    Semaphore sm = new Semaphore(2);
+    Semaphore sm = new Semaphore(1);
     public void run(){
         try{
         System.out.println("Available Permits: "+ sm.availablePermits());
         sm.acquire();
-        System.out.println("Thread..."+ Thread.currentThread().getName());
+        System.out.println("Thread..." + Thread.currentThread().getName());
         for(int i=0;i<5;i++)
         {
             System.out.println("Running thread: "+ Thread.currentThread().getName());
