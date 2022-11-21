@@ -23,9 +23,5 @@ public class SJF1{
             bt[i] = sc.nextInt();
             pid[i] = i+1;
         }
-        while(true)
-        {
-            st+= bt[i];
-        }
     }
 }

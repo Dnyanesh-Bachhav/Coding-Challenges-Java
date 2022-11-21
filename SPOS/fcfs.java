@@ -31,7 +31,6 @@ public class fcfs
         {
             for(int j=0;j<n-(i+1);j++)
             {   
-
                 if(at[j]>at[j+1])
                 {
                     tmp=at[j];
@@ -45,13 +44,10 @@ public class fcfs
                     tmp=pid[j];
                     pid[j]=pid[j+1];
                     pid[j+1]=tmp;
-
                 }
-
             }
-            
-
         }
+        
 
         for(int i=0;i<n;i++)
         {
