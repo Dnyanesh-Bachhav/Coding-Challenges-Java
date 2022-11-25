@@ -75,6 +75,7 @@ class tables{
                 int num;
                 try
                 {
+                // To check if it is number...
                 num = Integer.valueOf(str);
                 }
                 catch(Exception e)
