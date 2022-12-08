@@ -34,6 +34,8 @@ class ReArrange{
         {
             arr[i] = li.get(i);
         }
-        // System.out.println(arr);
+        for(long i:arr)
+        System.out.println(i);
+
     }
 }
