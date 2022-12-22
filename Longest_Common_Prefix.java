@@ -1,5 +1,5 @@
-class demo{
-    public static void main(String args[]){
+class Longest_Common_Prefix{
+        public static void main(String args[]){
         System.out.println("Hello World...!!!");
         String str1[] = {"geeksforgeeks","geeks","geek","geezer"};
         int max = 0;
